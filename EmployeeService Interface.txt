@@ -1,0 +1,20 @@
+package com.kb.service;
+
+import java.util.List;
+
+import com.kb.model.StudentId;
+
+public interface StudentIdService {
+	
+	public void addStudentId(StudentId studentid);
+	
+	public void updateStudentId(StudentId studentid);
+	
+	public StudentId getStudentIdById(int id);
+	
+	public void removeStudentId(int id);
+	
+	public List<StudentId> listStudentId();
+
+
+}

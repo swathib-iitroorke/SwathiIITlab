@@ -1,0 +1,56 @@
+package com.kb.controllers;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+ 
+import com.kb.model.StudentId;
+import com.kb.service.StudentIdService;
+ 
+@Controller
+public class StudentIdController {
+   
+    @Autowired
+    private StudentIdService studentidService;
+ 
+    @RequestMapping(value = "/studentid", method = RequestMethod.GET)
+    public String listemployees(Model model) {
+        model.addAttribute("studentid", StudentId());
+        model.addAttribute("studentIdList", studentidService.listStudentId());
+        return "employee";
+    }
+ 
+    // Same method For both Add and Update StudentId
+    @RequestMapping(value = "/studentid/add", method = RequestMethod.POST)
+    public String addstudentid(@ModelAttribute("studentid") StudentId studentid) {
+ 
+        if (employee.getStudentId()==null || employee.getStudentId() == 0) {
+            // new StudentId, add it
+            StudentIdService.addStudentId(studentid);
+        } else {
+            // existing employee, call update
+            studentidService.updateStudentId(studentid);
+        }
+ 
+        return "redirect:/studentid";
+ 
+    }
+ 
+    @RequestMapping("/studentid/remove/{id}")
+    public String removestudentid(@PathVariable("id") int id) {
+ 
+        studentidService.removeStudentId(id);
+        return "redirect:/studentid";
+    }
+ 
+    @RequestMapping("/studentid/edit/{id}")
+    public String editstudentid(@PathVariable("id") int id, Model model) {
+        model.addAttribute("studentid", studentidService.getStudentIdById(id));
+        model.addAttribute("studentidList", studentidService.liststudentid());
+        return "studentid";
+    }
+}

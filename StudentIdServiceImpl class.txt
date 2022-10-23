@@ -1,0 +1,51 @@
+package com.kb.service;
+ 
+import java.util.List;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.kb.dao.StudentIdDAO;
+ 
+import com.kb.model.Employee;
+ 
+@Service
+public class StudentIdServiceImpl implements StudentIdService {
+   
+    @Autowired
+    private StudentIdDAO studentidDAO;
+ 
+    public void setstudentidDAO(StudentIdDAO studentidDAO) {
+        this.studentidDAO = studentidDAO;
+    }
+ 
+    @Override
+    @Transactional
+    public void addStudentId(StudentId studentid) {
+        studentidDAO.addEmployee(studentid);
+    }
+ 
+    @Override
+    @Transactional
+    public void updateStudentId(StudentId studentid) {
+        studentidDAO.updateStudentId(employee);
+    }
+ 
+    @Override
+    @Transactional
+    public List<StudentId> listStudentId() {
+        return this.studentidDAO.listStudentId();
+    }
+ 
+    @Override
+    @Transactional
+    public StudentId getStudentIdById(int id) {
+        return studentidDAO.getStudentIdById(id);
+    }
+ 
+    @Override
+    @Transactional
+    public void removeStudentId(int id) {
+        studentidDAO.removeStudentId(id);
+    }
+}

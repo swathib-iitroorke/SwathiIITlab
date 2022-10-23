@@ -1,0 +1,15 @@
+AddStudentId=Add New StudentId
+
+StudentId=Student Id
+
+Name=Name
+
+Department=Department
+
+Country=Country
+
+Submit=Submit
+
+studentidList=StudentId List
+
+EditStudentId=Edit StudentId

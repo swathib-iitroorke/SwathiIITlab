@@ -1,0 +1,127 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page session="false" %>
+<html>
+<head>
+    <title>StudentId Page</title>
+    <style type="text/css">
+        .stdTable  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+        .stdTable td{font-family:Arial, sans-serif;font-size:16px;padding:10px 5px;border-
+                              style:solid;border-width:2px;overflow:hidden;word-break:normal;border-
+                              color:#ccc;color:#00FF00;background-color:#FF0000;}
+        .stdTable th{font-family:Arial, sans-serif;font-size:16px;font-weight:normal;padding:10px
+                              5px;border-style:solid;border-width:2px;overflow:hidden;word-break:normal;border-
+                              color:#ccc;color:#000000;background-color:#FF4500;}
+        .stdTable .empTable-4eph{background-color:#C0C0C0}
+    </style>
+</head>
+<body>
+ 
+    <c:if test="${empty studentid.studentidId}">
+    <h1>
+    <spring:message code="AddStudentId"/>
+    </h1>
+    </c:if>
+ 
+ 
+<c:url var="addAction" value="/studentid/add" ></c:url>
+ 
+<form:form action="${addAction}" modelAttribute="employee">
+<table>
+    <c:if test="${not empty employee.employeeId}">
+    <h1><spring:message code="EditStudentId"/></h1>
+    <tr>
+        <td>
+            <form:label path="studentidId">
+                <spring:message code="StudentIdID"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="studentidId" readonly="true" size="8"  disabled="true" />
+            <form:hidden path="studentidId" />
+        </td>
+    </tr>
+    </c:if>
+ 
+    <tr>
+        <td>
+            <form:label path="studentid">
+                <spring:message code="Student Id"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="studentid" />
+        </td>
+    </tr>
+ 
+    <tr>
+        <td>
+            <form:label path="name">
+                <spring:message code="Name"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="Name" />
+        </td>
+    </tr>
+ 
+    <tr>
+        <td>
+            <form:label path="department">
+                <spring:message code="Department"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="department" />
+        </td>
+    </tr>
+ 
+    <tr>
+        <td>
+            <form:label path="country">
+                <spring:message code="Country"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="country" />
+        </td>
+    </tr>
+ 
+    <tr>
+        <td colspan="2">
+                <input type="submit"
+                    value="<spring:message code="Submit"/>" />
+        </td>
+    </tr>
+ 
+</table>   
+</form:form>
+<br>
+ 
+<c:if test="${not empty studentidList}">
+<h3><spring:message code="studentidList"/></h3>
+    <table class="stdTable">
+    <tr>
+        <th width="80">Student Id</th>
+        <th width="120">Name</th>
+        <th width="120">Department</th>
+        <th width="120">Country</th>
+        <th width="60">Edit</th>
+        <th width="60">Delete</th>
+    </tr>
+ 
+    <c:forEach items="${studentidList}" var="studentid">
+        <tr>
+            <td>${studentid.studentid}</td>
+            <td>${studentid.name}</td>
+            <td>${studentid.department}</td>
+            <td>${studentid.country}</td>
+            <td><a href="<c:url value='/studentid/edit/${studentid.studentidId}' />" >Edit</a></td>
+            <td><a href="<c:url value='studentid/remove/${studentid.studentidId}' />" >Delete</a></td>
+        </tr>
+    </c:forEach>
+    </table>
+</c:if>
+</body>
+</html>

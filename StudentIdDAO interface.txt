@@ -1,0 +1,19 @@
+package com.kb.dao;
+ 
+import java.util.List;
+ 
+import com.kb.model.StudentId;
+ 
+public interface StudentIdDAO {
+   
+    public void addEmployee(StudentId studentid);
+   
+    public void updateEmployee(StudentId studentid);
+   
+    public StudentId getStudentIdById(int id);
+   
+    public void removeStudentId(int id);
+   
+    public List<StudentId> listStudentId();
+ 
+}

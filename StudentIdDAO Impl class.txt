@@ -1,0 +1,53 @@
+package com.kb.dao;
+ 
+import java.util.List;
+ 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+ 
+import com.kb.model.StudentId;
+ 
+@Repository
+public class StudentIdDAOImpl implements StudentIdDAO{
+   
+    @Autowired
+     private SessionFactory sessionFactory;
+   
+    @Override
+    public void addStudentId(StudentId studentid) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(studentid);
+    }
+ 
+    @Override
+    public void updateStudentId(StudentId studentid) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(studentid);
+    }
+ 
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<StudentId> listStudentId() {
+        Session session = sessionFactory.getCurrentSession();
+        List<StudentId> StudentIdList = session.createQuery("from StudentId").list();
+        return StudentIdList;
+    }
+ 
+    @Override
+    public StudentId getStudentIdById(int id) {
+        Session session = sessionFactory.getCurrentSession();      
+        StudentId employee = (StudentId) session.get(StudentId.class, new Integer(id));
+        return studentid;
+    }
+ 
+    @Override
+    public void removeStudentId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        StudentId studentid = (StudentId) session.get(StudentId.class, new Integer(id));
+        if(null != studentid){
+            session.delete(studentid);
+        }
+    }
+}
